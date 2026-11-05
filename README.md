@@ -214,7 +214,7 @@ Honest limitations of the current reference implementation:
 - **Chain head not replicated.** The current store is PostgreSQL, but the hash-chain head is held in application memory between requests. In production, the chain head must be replicated and published to witnesses.
 
 These gaps are **intentional**. The goal of this repository is to prove the mechanism, not to ship a production system.
-```
+
 ## Status
 
 - [x] **Phase 0** — Working PoC (identity, mandates, authorization, receipts)
@@ -224,7 +224,7 @@ These gaps are **intentional**. The goal of this repository is to prove the mech
       
 ```
 ### Tech stack
-```
+
 | Layer | Technology |
 |---|---|
 | API | **FastAPI** — async REST API with auto-generated OpenAPI / Swagger |

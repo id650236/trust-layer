@@ -90,6 +90,7 @@ docker run --name trustlayer-db \
 
 ### 2. Set up the backend
 
+```
 bash
 cd backend
 python3 -m venv .venv
@@ -98,12 +99,13 @@ pip install -r requirements.txt
 
 
 ### 3. Configure environment
-
+```
 bash
 cp .env.example .env
 
 
-### 4. Apply the schema  
+### 4. Apply the schema
+``` 
 bash
 docker exec -i trustlayer-db psql -U postgres -d trustlayer < schema.sql
 
@@ -126,7 +128,8 @@ curl -X POST http://localhost:8000/v1/principals \
   }'
 
  ###. Response (201):
-
+ 
+```
 json
 {
   "principal_id": "5d1cc5e9-aaa1-4796-826e-5561f60ab84f",
@@ -162,6 +165,7 @@ curl -X POST http://localhost:8000/v1/authorize \
 
 ### Allowed:
 
+```
 json
 {
   "decision": "allow",

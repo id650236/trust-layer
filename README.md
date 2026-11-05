@@ -79,8 +79,7 @@ Full interactive documentation: **http://localhost:8000/docs** (Swagger UI, auto
 - Docker (for PostgreSQL)
 
 ### 1. Start PostgreSQL
-
-```bash
+bash
 docker run --name trustlayer-db \
   -e POSTGRES_PASSWORD=devpassword \
   -e POSTGRES_DB=trustlayer \
@@ -90,7 +89,6 @@ docker run --name trustlayer-db \
 
 ### 2. Set up the backend
 
-```
 bash
 cd backend
 python3 -m venv .venv
@@ -99,12 +97,12 @@ pip install -r requirements.txt
 
 
 ### 3. Configure environment
-```
+
 bash
 cp .env.example .env
 
 ### 4. Apply the schema
-``` 
+ 
 bash
 docker exec -i trustlayer-db psql -U postgres -d trustlayer < schema.sql
 
@@ -113,11 +111,11 @@ docker exec -i trustlayer-db psql -U postgres -d trustlayer < schema.sql
 bash
 uvicorn app.main:app --reload --port 8000
 Open http://localhost:8000/docs.
-
-End-to-end example
-
-###1. Register an agent
 ```
+### End-to-end example
+
+### 1. Register an agent
+
 bash
 curl -X POST http://localhost:8000/v1/principals \
   -H 'Content-Type: application/json' \
@@ -140,10 +138,10 @@ json
   "status": "active",
   "created_at": "2026-11-05T18:39:49.403138Z"
 }
-
+```
 ### 2.Attach a mandate
 
-```
+
 bash
 curl -X POST http://localhost:8000/v1/principals/{principal_id}/mandates \
   -H 'Content-Type: application/json' \
@@ -167,7 +165,7 @@ curl -X POST http://localhost:8000/v1/authorize \
 
 ### Allowed:
 
-```
+
 json
 {
   "decision": "allow",
@@ -177,8 +175,7 @@ json
   "timestamp": "2026-11-05T18:39:49.627653Z"
 
 }
-
-
+```
 ### Denied (amount over limit):
 
 json
@@ -188,6 +185,7 @@ json
   "mandate_id": "faaf737e-9d03-46f5-ba21-599893e3d50d",
   "receipt_id": null
 }
+
 ### Denied (action not in mandate):
 
 json
@@ -204,7 +202,7 @@ json
 - Every allowed action produces a **tamper-evident receipt** stored in an append-only, hash-chained audit log.
 - Every receipt is **independently verifiable**: given the receipt and the agent's public key, any third party can confirm what happened.
 - A `deny` decision leaves **no receipt** — the audit trail records successful actions, not attempts.
-
+```
 ## What this does NOT do (yet)
 
 Honest limitations of the current reference implementation:
@@ -216,16 +214,17 @@ Honest limitations of the current reference implementation:
 - **Chain head not replicated.** The current store is PostgreSQL, but the hash-chain head is held in application memory between requests. In production, the chain head must be replicated and published to witnesses.
 
 These gaps are **intentional**. The goal of this repository is to prove the mechanism, not to ship a production system.
-
+```
 ## Status
 
 - [x] **Phase 0** — Working PoC (identity, mandates, authorization, receipts)
 - [x] **Phase 1** — Reference implementation (FastAPI + PostgreSQL)
 - [ ] **Phase 2** — Production hardening (revocation, real SCITT receipts, HSM/KMS integration)
 - [ ] **Phase 3** — Ecosystem (profiles, witnesses, standardized endpoints)
-
-## Tech stack
-
+      
+```
+### Tech stack
+```
 | Layer | Technology |
 |---|---|
 | API | **FastAPI** — async REST API with auto-generated OpenAPI / Swagger |

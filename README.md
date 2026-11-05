@@ -222,7 +222,7 @@ These gaps are **intentional**. The goal of this repository is to prove the mech
 - [ ] **Phase 2** — Production hardening (revocation, real SCITT receipts, HSM/KMS integration)
 - [ ] **Phase 3** — Ecosystem (profiles, witnesses, standardized endpoints)
       
-```
+
 ### Tech stack
 
 | Layer | Technology |

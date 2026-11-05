@@ -103,20 +103,21 @@ pip install -r requirements.txt
 bash
 cp .env.example .env
 
-
 ### 4. Apply the schema
 ``` 
 bash
 docker exec -i trustlayer-db psql -U postgres -d trustlayer < schema.sql
 
 ### 5. Run
-
+```
 bash
 uvicorn app.main:app --reload --port 8000
 Open http://localhost:8000/docs.
 
 End-to-end example
-1. Register an agent
+
+###1. Register an agent
+```
 bash
 curl -X POST http://localhost:8000/v1/principals \
   -H 'Content-Type: application/json' \
@@ -127,7 +128,7 @@ curl -X POST http://localhost:8000/v1/principals \
     "profile": "banking"
   }'
 
- ###. Response (201):
+ ### 1. Response (201):
  
 ```
 json
@@ -140,9 +141,9 @@ json
   "created_at": "2026-11-05T18:39:49.403138Z"
 }
 
-### 2. Attach a mandate
+### 2.Attach a mandate
 
-
+```
 bash
 curl -X POST http://localhost:8000/v1/principals/{principal_id}/mandates \
   -H 'Content-Type: application/json' \
@@ -152,7 +153,8 @@ curl -X POST http://localhost:8000/v1/principals/{principal_id}/mandates \
     "valid_for_hours": 24
   }'
 
-3. Request authorization
+### 3. Request authorization
+   
 bash
 curl -X POST http://localhost:8000/v1/authorize \
   -H 'Content-Type: application/json' \
